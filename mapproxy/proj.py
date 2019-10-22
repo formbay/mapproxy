@@ -241,9 +241,11 @@ def try_libproj_import():
 proj_imports = []
 
 if 'MAPPROXY_USE_LIBPROJ' in os.environ:
+    print("Inside MAPPROXY_USE_LIBPROJ")
     proj_imports = [try_libproj_import]
 
 if 'MAPPROXY_USE_PYPROJ' in os.environ:
+    print("Inside MAPPROXY_USE_PYPROJ")
     proj_imports = [try_pyproj_import]
 
 if not proj_imports:
@@ -251,11 +253,14 @@ if not proj_imports:
         # prefer pyproj on windows
         proj_imports = [try_pyproj_import, try_libproj_import]
     else:
-        proj_imports = [try_libproj_import, try_pyproj_import]
+        proj_imports = [try_pyproj_import]
 
 for try_import in proj_imports:
     res = try_import()
+    print(res)
     if res:
+        print("Import Success")
+        print(res)
         Proj, transform, set_datapath = res
         break
 else:
