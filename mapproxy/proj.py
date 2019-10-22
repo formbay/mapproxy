@@ -129,7 +129,8 @@ class ProjInitError(ProjError):
 
 def try_pyproj_import():
     try:
-        from pyproj import Proj, transform, set_datapath
+        from pyproj import Proj, transform, _datadir
+        from  _datadir import  set_data_dir as set_datapath
     except ImportError:
         return False
     log_system.info('using pyproj for coordinate transformation')
@@ -253,7 +254,7 @@ if not proj_imports:
         # prefer pyproj on windows
         proj_imports = [try_pyproj_import, try_libproj_import]
     else:
-        proj_imports = [try_pyproj_import]
+        proj_imports = [try_libproj_import, try_pyproj_import]
 
 for try_import in proj_imports:
     res = try_import()
