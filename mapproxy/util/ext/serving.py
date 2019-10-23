@@ -380,24 +380,7 @@ def restart_with_reloader():
     """
     while 1:
         _log('info', ' * Restarting with reloader')
-        _log('info', ' * sys.argv')
-        commandstring = '';  
-
-        for arg in sys.argv: 
-            if ' ' in arg:
-                commandstring+= '"{}"  '.format(arg) ;   # Put the quotes back in
-            else:
-                commandstring+="{}  ".format(arg) ;
-
-        _log('info', commandstring)
-
-      #  args = [sys.executable] + sys.argv
-#        _log('info', ' * sys.executable')
-        args = sys.argv
-        _log('info', ' * sys.executable')
-        _log('info', sys.executable)
-        _log('info', ' * os.name')
-        _log('info', os.name)
+        args = [sys.executable] + sys.argv
 
         if os.name == 'nt':
             # pip installs commands as .exe, but sys.argv[0]
@@ -412,17 +395,6 @@ def restart_with_reloader():
                 args[1] = args[1] + '.exe'
         new_environ = os.environ.copy()
         new_environ['WERKZEUG_RUN_MAIN'] = 'true'
-        _log('info', ' * new_environ')
-#        _log('info', new_environ)
-        commandstring1 = '';  
-
-        for arg in new_environ:          # skip sys.argv[0] since the question didn't ask for it
-            if ' ' in arg:
-                commandstring1+= '"{}"  '.format(arg) ;   # Put the quotes back in
-            else:
-                commandstring1+="{}  ".format(arg) ;
-
-        _log('info', commandstring1)
 
         # a weird bug on windows. sometimes unicode strings end up in the
         # environment and subprocess.call does not like this, encode them
