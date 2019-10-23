@@ -380,8 +380,15 @@ def restart_with_reloader():
     """
     while 1:
         _log('info', ' * Restarting with reloader')
+        _log('info', ' * sys.argv')
+        _log('info', sys.argv)
 
         args = [sys.executable] + sys.argv
+        _log('info', ' * args')
+        _log('info', args)
+        _log('info', ' * os.name')
+        _log('info', os.name)
+
         if os.name == 'nt':
             # pip installs commands as .exe, but sys.argv[0]
             # can miss the prefix.
@@ -395,6 +402,8 @@ def restart_with_reloader():
                 args[1] = args[1] + '.exe'
         new_environ = os.environ.copy()
         new_environ['WERKZEUG_RUN_MAIN'] = 'true'
+        _log('info', ' * new_environ')
+        _log('info', new_environ)
 
         # a weird bug on windows. sometimes unicode strings end up in the
         # environment and subprocess.call does not like this, encode them

@@ -116,11 +116,17 @@ class _SRS(object):
         Create a new SRS with the given `srs_code` code.
         """
         self.srs_code = srs_code
+        print("Inside __init__ SRS")
+        print("SRS Code")
+        print(srs_code)
+
 
         init = _SRS.proj_init.get(srs_code, None)
         if init is not None:
+            print("Inside if init none")
             self.proj = init()
         else:
+            print("Inside if init not none")
             epsg_num = get_epsg_num(srs_code)
             self.proj = Proj(init='epsg:%d' % epsg_num)
 
