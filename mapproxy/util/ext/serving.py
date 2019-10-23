@@ -383,7 +383,7 @@ def restart_with_reloader():
         _log('info', ' * sys.argv')
         commandstring = '';  
 
-        for arg in sys.argv[1:]:          # skip sys.argv[0] since the question didn't ask for it
+        for arg in sys.argv: 
             if ' ' in arg:
                 commandstring+= '"{}"  '.format(arg) ;   # Put the quotes back in
             else:
@@ -411,7 +411,16 @@ def restart_with_reloader():
         new_environ = os.environ.copy()
         new_environ['WERKZEUG_RUN_MAIN'] = 'true'
         _log('info', ' * new_environ')
-        _log('info', new_environ)
+#        _log('info', new_environ)
+        commandstring1 = '';  
+
+        for arg in new_environ:          # skip sys.argv[0] since the question didn't ask for it
+            if ' ' in arg:
+                commandstring1+= '"{}"  '.format(arg) ;   # Put the quotes back in
+            else:
+                commandstring1+="{}  ".format(arg) ;
+
+        _log('info', commandstring1)
 
         # a weird bug on windows. sometimes unicode strings end up in the
         # environment and subprocess.call does not like this, encode them
