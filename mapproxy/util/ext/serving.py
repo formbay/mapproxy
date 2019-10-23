@@ -381,7 +381,7 @@ def restart_with_reloader():
     while 1:
         _log('info', ' * Restarting with reloader')
         _log('info', ' * sys.argv')
-        _log('info', sys.argv)
+        _log('info', ' '.join(sys.argv[1:])
 
         args = [sys.executable] + sys.argv
         _log('info', ' * args')
