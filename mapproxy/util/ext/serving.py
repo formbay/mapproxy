@@ -392,8 +392,8 @@ def restart_with_reloader():
         _log('info', commandstring)
 
         args = [sys.executable] + sys.argv
-        _log('info', ' * args')
-        _log('info', args)
+        _log('info', ' * sys.executable')
+        _log('info', sys.executable)
         _log('info', ' * os.name')
         _log('info', os.name)
 
