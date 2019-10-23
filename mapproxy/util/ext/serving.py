@@ -381,7 +381,15 @@ def restart_with_reloader():
     while 1:
         _log('info', ' * Restarting with reloader')
         _log('info', ' * sys.argv')
-        _log('info', ' '.join(sys.argv[1:])
+        commandstring = '';  
+
+        for arg in sys.argv[1:]:          # skip sys.argv[0] since the question didn't ask for it
+            if ' ' in arg:
+                commandstring+= '"{}"  '.format(arg) ;   # Put the quotes back in
+            else:
+                commandstring+="{}  ".format(arg) ;
+
+        _log('info', commandstring)
 
         args = [sys.executable] + sys.argv
         _log('info', ' * args')
